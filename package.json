@@ -1,0 +1,14 @@
+{
+  "name": "potluck-office",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "4.0.0-beta.3",
+    "bootstrap-datepicker": "^1.7.1",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.9"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Joseph Masongsong <jrodriguezmasongsong@gmail.com>",
+  "license": "MIT"
+}
