@@ -21,7 +21,7 @@ class EmploymentContractsController < ApplicationController
           params[:rails_settings_setting_object].each do |key, value|
               @employment_contract.settings(:offer_body).update_attributes! key.to_sym => value
           end
-        redirect_to preview_employment_contract_path
+        redirect_to employment_contract_path
      end
   end
 
