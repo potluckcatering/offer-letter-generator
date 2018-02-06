@@ -110,8 +110,17 @@
             = link_to raw('<i class="icon-note mr-1"></i> Edit Offer Body'), offer_settings_employment_contract_path(@employment_contract), class: 'btn btn-block btn-secondary'
           .col-sm-3
             - if current_user.admin?
-              = link_to word_doc_path(id: @employment_contract.id), class: 'btn btn-block btn-info' do
-                %i.fa.fa-cloud-download.mr-1
-                Download
+              - if @employment_contract.approved?
+                = link_to word_doc_path(id: @employment_contract.id), class: 'btn btn-block btn-info' do
+                  %i.fa.fa-cloud-download.mr-1
+                  Download
+              - else
+                = link_to raw("<i class='icon-check'></i> Approve Request"), approve_request_employment_contract_path(id: @employment_contract.id), :method => :put, class: "btn btn-block btn-info"
+
             - else
-              = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => @employment_contract.id), class: "btn btn-block btn-info"     
+              - if @employment_contract.approved?
+                = link_to word_doc_path(id: @employment_contract.id), class: 'btn btn-block btn-info' do
+                  %i.fa.fa-cloud-download.mr-1
+                  Download
+              - else
+                = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => @employment_contract.id), class: "btn btn-block btn-info"     

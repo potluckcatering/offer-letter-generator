@@ -1,6 +1,6 @@
 class EmploymentContractsController < ApplicationController
   # respond_to :docx
-  before_action :set_employment_contract, only: [:show, :edit, :update, :destroy, :offer_settings, :update_offer_letter, :send_notification_email]
+  before_action :set_employment_contract, only: [:show, :edit, :update, :destroy, :offer_settings, :update_offer_letter, :send_notification_email, :approve_request]
 
   # GET /employment_contracts
   # GET /employment_contracts.json
@@ -23,6 +23,14 @@ class EmploymentContractsController < ApplicationController
           end
         redirect_to employment_contract_path
      end
+  end
+
+  def approve_request
+    @employment_contract.update(approved: true)
+    @user = @employment_contract.supervisor
+    UserMailer.approved_email(@user, @employment_contract, employment_contract_url(@employment_contract)).deliver_now
+    flash[:notice] = "Successfully approved Setup Request. It is now available for download."
+    redirect_to employment_contracts_path
   end
 
   def send_notification_email
@@ -91,6 +99,6 @@ class EmploymentContractsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employment_contract_params
-      params.require(:employment_contract).permit(:department_id, :position_id, :compensation, :pay_frequency, :compensation_type, :supervisor_id, :start_date, :employee_id)
+      params.require(:employment_contract).permit(:department_id, :approved, :position_id, :compensation, :pay_frequency, :compensation_type, :supervisor_id, :start_date, :employee_id)
     end
 end

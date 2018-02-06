@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your Employee Setup Request Was Approved</h1>
+    <p>
+      <%= @user.name %> your employee setup request for <%= @employment_contract.employee.name %> updated on <%= @employment_contract.updated_at.strftime('%B %d, %Y') %> has been approved by management.
+    </p>
+    <p>
+      To view and download, just follow this link: <%= link_to @url, @url %>.
+    </p>
+    <p>Thank you!</p>
+  </body>
+</html>
