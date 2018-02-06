@@ -103,3 +103,15 @@
             %p #{ @employment_contract.other_allowances.blank? ? '' : 'Other allowances: ' + @employment_contract.other_allowances }
             %p #{ @employment_contract.bonus_structure.blank? ? '' : 'Bonus structure: ' + @employment_contract.bonus_structure }
             %p #{ @employment_contract.professional_development_funding.blank? ? '' : 'Professional development funding: ' + @employment_contract.professional_development_funding }
+        .row.mb-4
+          .col-sm-3.ml-auto
+            = link_to raw('<i class="icon-pencil mr-1"></i> Edit Request'), edit_employment_contract_path(@employment_contract), class: 'btn btn-block btn-warning'
+          .col-sm-3
+            = link_to raw('<i class="icon-note mr-1"></i> Edit Offer Body'), offer_settings_employment_contract_path(@employment_contract), class: 'btn btn-block btn-secondary'
+          .col-sm-3
+            - if current_user.admin?
+              = link_to word_doc_path(id: @employment_contract.id), class: 'btn btn-block btn-info' do
+                %i.fa.fa-cloud-download.mr-1
+                Download
+            - else
+              = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => @employment_contract.id), class: "btn btn-block btn-info"     

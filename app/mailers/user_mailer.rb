@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
     @employment_contract = contract
     @admins = User.where(admin: true)
     admins = @admins.collect(&:email).join(",")
-    mail(to: admins, subject: 'Employee Setup Request')
+    mail(from: @user.email, to: admins, subject: 'Employee Setup Request')
   end
 
 end
