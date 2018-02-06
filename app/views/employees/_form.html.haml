@@ -1,0 +1,33 @@
+= simple_form_for(@employee) do |f|
+  = f.error_notification
+  .row
+    .col-sm-6
+      = f.input :first_name
+    .col-sm-6
+      = f.input :last_name
+  .row
+    .col-sm-6
+      = f.input :phone
+    .col-sm-6
+      = f.input :email
+  = f.simple_fields_for :address do |a|
+    .row
+      .col-sm-8
+        .form-group
+          %label{:for => "address"} Address
+          %input#autocomplete.form-control{:onfocus => "geolocate()", :required => "true", :type => "text", placeholder: "#{ @employee.address.postal_code.present? ? @employee.address.full_address : 'Begin typing address...' }"}/
+          %small.text-muted.form-text Let Google know your location for autocomplete
+          = a.input :street_number, wrapper: false, as: :hidden, input_html: { id: "street_number" }
+          = a.input :street_address, wrapper: false, as: :hidden, input_html: { id: "route" }
+          = a.input :city, wrapper: false, as: :hidden, input_html: { id: "locality" }
+          = a.input :province, wrapper: false, as: :hidden, input_html: { id: "administrative_area_level_1" }
+          = a.input :postal_code, wrapper: false, as: :hidden, input_html: { id: "postal_code" }
+      .col-sm-4
+        = a.input :apt_number, placeholder: "Apt No."
+      .col-sm-6
+        = link_to "Cancel", root_path, class: 'btn-warning btn-block btn'
+      .col-sm-6
+        = f.button :submit, class: 'btn-primary btn-block'
+
+- content_for :body_js do
+  = javascript_include_tag "autocomplete"

@@ -1,0 +1,22 @@
+
+
+
+%table.table.table-bordered
+  %thead.thead-dark
+    %tr
+      %th Name
+      %th Department
+      %th
+      %th
+      %th
+
+  %tbody
+    - @positions.each do |position|
+      %tr
+        %td= position.name
+        %td= position.department.name
+        %td= link_to 'Show', position
+        %td= link_to 'Edit', edit_position_path(position)
+        %td= link_to 'Destroy', position, method: :delete, data: { confirm: 'Are you sure?' }
+
+= link_to 'New Position', new_position_path, class: 'btn btn-primary'

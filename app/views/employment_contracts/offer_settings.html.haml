@@ -1,0 +1,34 @@
+.card.mb-5
+
+  .card-body.py-5
+
+    .row
+      .col-sm-10.mx-auto
+        = link_to employment_contract_path do
+          %i.fa.fa-times.text-muted.float-right.close-card
+        %h3.font-weight-light.mb-5.text-center
+          Edit Employment Contract Body
+
+
+        = simple_form_for(@employment_contract, url: update_offer_letter_employment_contract_path, method: :put) do |f|
+          = simple_fields_for @employment_contract.settings(:offer_body) do |settings|
+            = settings.input :introduction, as: :text, input_html: { rows: 5 }
+            = settings.input :job_classification, as: :text, input_html: { rows: 5 }
+            = settings.input :wage_salary, as: :text, input_html: { rows: 5 }
+            = settings.input :vacation, as: :text, input_html: { rows: 5 }
+            = settings.input :probationary_period, as: :text, input_html: { rows: 5 }
+            = settings.input :termination, as: :text, input_html: { rows: 5 }
+            = settings.input :group_insurance_benefits, as: :text, input_html: { rows: 5 }
+            = settings.input :dress_code, as: :text, input_html: { rows: 5 }
+            = settings.input :equipment, as: :text, input_html: { rows: 5 }
+            = settings.input :confidential_information, as: :text, input_html: { rows: 5 }
+            = settings.input :performance_reviews, as: :text, input_html: { rows: 5 }
+            = settings.input :employment_policies, as: :text, input_html: { rows: 5 }
+            = settings.input :allowances, as: :text, input_html: { rows: 5 }
+
+            = settings.button :submit, "Update Offer Body", class: "btn btn-primary"
+
+
+
+
+

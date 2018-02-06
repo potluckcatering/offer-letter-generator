@@ -1,0 +1,18 @@
+
+
+
+
+.card.card-session-new.mx-auto
+  .card-body
+    .text-center
+      = image_tag('potluck-logo', class: 'contract-logo mb-3')
+    = render 'layouts/flash'
+
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = f.input :email, required: false, autofocus: true, placeholder: "Email"
+      = f.input :password, required: false, wrapper: false, input_html: { class: "mb-1" }, placeholder: "Password"
+      %small.mb-3.d-block
+        = link_to "Forgot your password?", new_password_path(resource_name)
+
+
+      = f.button :submit, "Sign In", class: 'btn-block btn-primary mb-2'

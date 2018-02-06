@@ -15,8 +15,10 @@ SimpleForm.setup do |config|
     b.use :label, class: 'control-label'
 
     b.use :input, class: 'form-control'
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :error, wrap_with: { tag: 'small', class: 'help-block text-danger d-block' }
+    # b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'small', class: 'text-muted help-block' }
+
   end
 
   config.wrappers :vertical_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
@@ -53,7 +55,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  config.wrappers :horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :horizontal_form, tag: 'div', class: 'form-group row', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -66,7 +68,9 @@ SimpleForm.setup do |config|
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input, class: 'form-control'
       ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
-      ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+      # ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+      ba.use :hint,  wrap_with: { tag: 'small', class: 'text-muted help-block' }
+
     end
   end
 

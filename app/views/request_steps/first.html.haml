@@ -1,0 +1,12 @@
+= render :layout => 'form' do |f|   
+
+  = f.input :compensation_type, collection: EmploymentContract.compensation_types.keys.to_a, include_blank: false, label: "Job Classification", hint: "How many hours a week will the employee be expected to work?"
+
+  %label * Compensation
+  .input-group
+    .input-group-prepend
+      %span#basic-addon1.input-group-text $
+    = f.input :compensation, placeholder: "Enter dollar amount", wrapper: false, label: false
+  %small.text-muted.help-block.mb-3.mt-2.d-block Examples: $45000.00 or $11.58
+
+  = f.input :pay_frequency, label: "Pay grid", collection: EmploymentContract.pay_frequencies.keys.to_a, hint: "Is the compensation based on weeky rate of pay or annual rate of pay?", include_blank: false

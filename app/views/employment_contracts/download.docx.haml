@@ -1,0 +1,114 @@
+%p #{@employment_contract.created_at.strftime("%B %d, %Y")}
+%br
+%p Dear #{@employment_contract.employee.name},
+%br
+%p Further to our recent discussions, #{@employment_contract.department.name.upcase} is pleased to offer you emloyment on the basis, terms and conditions described in this letter. Please review these terms and conditions carefull and confirm your understanding and agreement to them by signing this letter where indicated below
+%br
+%table.sturdy{"cellpadding" => "10"}
+  %tbody
+    %tr
+      %td{width: "30%"}
+        %strong Position:
+
+      %td{width: "70%"}
+        = @employment_contract.position.name.upcase
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Job Classification:
+      %td{width: "70%"}
+        %p #{@employment_contract.compensation_type}
+        %br
+        %p Please note due to seasonal fluctuations in Potluck business, we cannot always guarantee consistent hours of work to any employee. Signature of this agreement acknowledges your understanding and acceptance of this term and condition of employment.
+        %br        
+    %tr
+      %td{width: "30%"}
+        %strong Start Date:
+
+      %td{width: "70%"}            
+        %p Your employment will commence on #{@employment_contract.start_date.strftime("%B %d, %Y")}
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Wage or Salary:
+
+      %td{width: "70%"}
+        %p Your salary is #{number_to_currency @employment_contract.compensation}/hr and will be payable bi-weekly.
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Vacation:
+
+      %td{width: "70%"}
+        %p Twee brunch live-edge synth pug godard ugh leggings williamsburg meh polaroid. Skateboard you probably haven't heard of them street art, jianbing mustache pitchfork.
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Probationary Period:
+      %td{width: "70%"}
+        %p The probation period is 3 months from th start date during which time this employment agreement can be terminated by either the Company or the employee without notice or payment of severance.
+    %tr
+      %td{width: "30%"}
+        %strong Termination:
+
+      %td{width: "70%"}
+        %p After completion of the probationary period, the employee may terminate this agreement up providing a minimum 2 weeks' written notice. After completion of the probationary period, the Employer may terminate the agreement with or without cause according to BC Employment Standards.        
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Group Insurance Benefits:
+
+      %td{width: "70%"}         
+        %p You are eligible to participate in Potluck's #{@employment_contract.compensation_type.upcase} Group Basic Health & Dental Insurance Benefits Program starting after 6 months of continuous employment. Coverage under this program is detailed in our Group Insurance Benefits Booklets and may be updated from time to time. The ongoing, monthly cost of enrolment in this Groupt Insurance Benefits Program will be paid 100% by #{@employment_contract.department.name.upcase} and is considered taxable income benefit. Enrolment is based on continuous employment from the employment start date. Part Time or Full Time benefits program coverage is determined by the number of continuous and regular weekly hours of work. Part Time benefits eligibility applies to those employees who continually work 15 to 23 hours per week. Full Time benefits eligiblity applies to those employees who continually work 24 to 40 hours per week. Enlrolment of any employee commences after 6 months of continuous employment.
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Dress Code or Uniforms:
+
+      %td{width: "70%"}
+        %p All Potluck employees are responsible for adhering to the Potluck dress code which is outline in the Potluck Book of Knowledge. 
+        %br
+        %p Delivery Drivers and Event Staff are required to adhere to specific Potluck uniform requirements. Uniforms for Drivers and Event staff are supplied by and remain the property of Potluck, requiring return after the termination of the employment relationship. Delivery Drivers also receive a laundry allowance. This is a taxable benefit.
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Equipment:
+
+      %td{width: "70%"}
+        %p For employees who regularly use a Potluck issued cell phone or a presonal cell phone for regular Potluck business use, these employees will receive an appropiate cell phone allowance. This is a taxable benefit.
+        %br
+        %p Some employees will also have access to Potluck computer equipment as needed for regular business use. All documents, records, lists, hard drives, etc. containin or referring to any Potluck matter and all copies therof are the property of Potluck, together with any equipment supplied by Potluck upon termination of this agreement or at any other time as requested by Potluck.
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Confidential Information:
+
+      %td{width: "70%"}
+        %p You hereby acknowledge that in the course of performing your work, you will have access to and be entrusted with information concerning confidential matters and trade secrets of Potluck including but not limited to clients, pricing, marketing, and training policies and techniques. Disclosure of this confidential information to competitors or other persons would be detrimental to the best interests of Potluck. Accordingly, you agree that you will not disclose any confidential information about Potluck to any person or use directly or indirectly the confidentail information for any other purpose other than to perform your duties. 
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Performance Reviews:
+
+      %td{width: "70%"}
+        %p At its discretion, Potluck Managers will review the employee's performance, salary, and benefits. Following such review the employees's salary may be reviewed at the sole discretion of Potluck.
+        %br
+    %tr
+      %td{width: "30%"}
+        %strong Employment Policies:
+
+      %td{width: "70%"}
+        %p All Potluck employment policies and guidelines can be found in the Potluck Book of Knowledge.
+        %br
+
+
+
+
+
+
+
+
+
+
+
+

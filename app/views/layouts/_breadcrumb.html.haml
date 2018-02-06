@@ -1,0 +1,5 @@
+- breadcrumbs(autoroot: true, display_single_fragment: false).tap do |links|
+  - if links.any?
+    .breadcrumb.mt-3
+      - links.each do |link|
+        = link_to link.text, link.url, class: (link.current? ? "active breadcrumb-item" : "breadcrumb-item")

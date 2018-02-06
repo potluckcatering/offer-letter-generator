@@ -16,3 +16,25 @@
 //= require popper.js/dist/umd/popper
 //= require bootstrap/dist/js/bootstrap
 //= require bootstrap-datepicker/dist/js/bootstrap-datepicker
+//= require selectize/dist/js/standalone/selectize
+//= require jquery-wizard/dist/jquery-wizard
+
+$(document).on('turbolinks:load', function() {
+
+
+	setTimeout(function() {
+	    $('.alert.alert-warning, .alert.alert-info, .alert.alert-success, .alert.alert-danger, .alert.alert-notice, .alert.alert-alert').slideUp();
+	}, 5000);
+
+	$('select').selectize({});
+
+	$('.wizard_form').wizard({
+		templates: {
+		  buttons: function() {
+		    const options = this.options;
+		    return `<div class="wizard-buttons"><a class="wizard-back btn btn-secondary" href="#${this.id}" data-wizard="back" role="button">${options.buttonLabels.back}</a><a class="wizard-next btn btn-primary" href="#${this.id}" data-wizard="next" role="button">${options.buttonLabels.next}</a><a class="wizard-finish" href="#${this.id}" data-wizard="finish" role="button">${options.buttonLabels.finish}</a></div>`;
+		  }
+		}
+	});
+
+});

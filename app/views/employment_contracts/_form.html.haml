@@ -1,0 +1,19 @@
+
+
+= simple_form_for(@employment_contract) do |f|
+  = f.error_notification
+
+  = f.association :employee, include_blank: "Start typing name or select from list", input_html: { class: "selectize" }, hint: raw("If you can not find the employee listed, you must #{link_to 'create', new_employee_path} the employee first.")
+
+  = f.association :department, include_blank: false, input_html: { class: "selectize" }, hint: "Does the employee fall under the Society or the Inc?"
+
+
+  = f.association :position, include_blank: "Select from list", input_html: { class: "selectize" }, hint: raw("If the position is not listed, you must #{link_to 'create it', new_position_path} first.")
+
+
+
+  .row
+    .col
+      = link_to "< Back", :back, class: "btn btn-warning btn-block"
+    .col
+      = f.button :submit, "Next Step >", class: 'btn btn-primary btn-block'

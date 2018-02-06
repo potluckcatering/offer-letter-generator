@@ -1,0 +1,13 @@
+.card.card-session-new.mx-auto
+  .card-body
+    .text-center
+      = image_tag('logo', class: 'contract-logo mb-2')
+      %h3.font-weight-light Set Your Password 
+      %p Finish setting your password to use app
+    = render 'layouts/flash'
+    = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } do |f|
+      = devise_error_messages!
+      = f.hidden_field :invitation_token
+      = f.input :password
+      = f.input :password_confirmation
+      = f.button :submit, t("devise.invitations.edit.submit_button"), class: "btn btn-primary btn-block"

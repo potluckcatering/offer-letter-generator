@@ -5,7 +5,9 @@
     "bootstrap": "4.0.0-beta.3",
     "bootstrap-datepicker": "^1.7.1",
     "jquery": "^3.2.1",
-    "popper.js": "^1.12.9"
+    "jquery-wizard": "^0.4.4",
+    "popper.js": "^1.12.9",
+    "selectize": "^0.12.4"
   },
   "version": "1.0.0",
   "main": "index.js",

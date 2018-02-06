@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Employee Setup Request</h1>
+    <p>
+      <%= @user.name %> is requesting that you review an employee setup request for <%= @employment_contract.employee.name %> updated on <%= @employment_contract.updated_at.strftime('%B %d, %Y') %>.
+    </p>
+    <p>
+      To view, just follow this link: <%= link_to @url, @url %>.
+    </p>
+    <p>Thank you!</p>
+  </body>
+</html>

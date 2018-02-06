@@ -18,6 +18,14 @@ gem "paperclip", "~> 5.0.0"
 gem 'devise'
 gem 'high_voltage', '~> 3.0.0'
 gem 'friendly_id', '~> 5.1.0'
+gem 'devise_invitable', '~> 1.7.0'
+gem 'caracal', '~> 1.1', '>= 1.1.2'
+gem 'caracal-rails'
+gem "gretel"
+gem 'wicked'
+gem 'geocoder'
+gem 'ledermann-rails-settings'
+gem 'figaro'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -58,3 +66,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+ruby "2.4.1"

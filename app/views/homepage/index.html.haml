@@ -1,0 +1,46 @@
+.card.mb-5
+  .card-body.py-5
+    .row
+      .col-sm-10.mx-auto
+        = link_to destroy_user_session_path, method: :delete do
+          %i.icon-logout.text-muted{style: "position: absolute; top: 0; right: 0; font-size: 1.5rem;"}
+        .text-center.mb-3
+          = image_tag('logo', class: 'contract-logo mb-2')
+
+          %h2.font-weight-light.mb-5 Employee Setup Request
+        = render 'layouts/flash'
+
+        .row
+          / .col.text-center
+          /   %i.icon-user-follow{style: "font-size: 4rem;"}
+          /   %h4.font-weight-light.mb-3.mt-2 Create Employee
+          /   %p.text-muted You must create the employee before you can submit a request.
+          /   %a.btn.btn-warning{href: new_employee_path} Create Employee
+          .col-sm-4.text-center.mb-5
+            %i.icon-user-follow{style: "font-size: 4rem;"}
+            %h4.font-weight-light.mb-3.mt-2 Setup Request
+            %p.text-muted Fill out the Employee Setup Request form to generate letter of offer.
+            %a.btn.btn-primary{href: new_employment_contract_path} Create Request
+
+          .col-sm-4.text-center.mb-5
+            %i.icon-list{style: "font-size: 4rem;"}
+            %h4.font-weight-light.mb-3.mt-2 Request History
+            %p.text-muted View, edit, delete, and download past letters of offers.
+            %a.btn.btn-warning{href: employment_contracts_path} View Past Requests
+
+          / .col-sm-4.text-center.mb-5
+          /   %i.icon-people{style: "font-size: 4rem;"}
+          /   %h4.font-weight-light.mb-3.mt-2 View Employees
+          /   %p.text-muted You must create the employee before you can submit a request.
+          /   %a.btn.btn-secondary{href: employees_path} View All Employees
+          .col-sm-4.text-center
+            %i.icon-settings{style: "font-size: 4rem;"}
+            %h4.font-weight-light.mb-3.mt-2 Account Settings
+            %p.text-muted Edit your name, email, and password settings.
+            %a.btn.btn-warning{href: edit_user_registration_path} Go To Settings
+          - if current_user.admin?
+            .col-sm-4.text-center
+              %i.icon-envelope{style: "font-size: 4rem;"}
+              %h4.font-weight-light.mb-3.mt-2 Invite User
+              %p.text-muted Invite users with the authorization to setup requests.
+              %a.btn.btn-primary{href: new_user_invitation_path} Send Invite

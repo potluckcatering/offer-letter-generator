@@ -1,0 +1,44 @@
+- breadcrumb :edit_account
+
+
+
+
+.card.card-edit-registration.mx-auto
+  .card-body.py-5
+    .row
+      .col-sm-10.mx-auto
+        = render 'layouts/close_card'
+
+        .text-center
+          = image_tag('logo', class: 'contract-logo mb-2')
+          %h3.font-weight-light.mb-3
+            Edit your account
+        = render 'layouts/flash'
+
+
+        = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+          = f.error_notification
+          .row
+            .col-sm-6
+              = f.input :first_name
+            .col-sm-6
+              = f.input :last_name
+          .row
+            .col
+              = f.input :email, required: true, autofocus: true
+          .row
+            .col-sm-6
+              = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
+            .col-sm-6
+              = f.input :password_confirmation, required: false
+            .col
+              = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
+          .row
+            .col
+              = f.button :submit, class: 'btn btn-primary btn-block'
+
+
+/ %h3 Cancel my account
+/ %p
+/   Unhappy? #{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+/ = link_to "Back", :back

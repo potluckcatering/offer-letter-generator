@@ -1,0 +1,35 @@
+- breadcrumb :employees
+
+.card.mb-4
+  .card-body.py-5
+    .row
+      .col-sm-10.mx-auto
+        = render 'layouts/close_card'
+        .text-center.mb-3
+          = image_tag('logo', class: 'contract-logo mb-2')
+          %h3.font-weight-light Viewing All Employees
+          %p.text-muted Deleting an employee will also delete all associated setup requests
+        = render 'layouts/flash'  
+      
+
+        %table.table.mt-3.table-borderless
+          %thead
+            %tr
+              %th Name
+              %th Address
+              %th
+
+
+          %tbody
+            - @employees.each do |employee|
+              %tr
+                %td
+                  #{employee.first_name} #{employee.last_name}
+                %td
+                  #{ employee.address.present? ? employee.address.full_address  : 'No Fixed Address' }
+
+                %td.text-right
+                  = link_to raw('<i class="fa fa-pencil mr-1"></i> Edit'), edit_employee_path(employee), class: "btn btn-sm btn-warning"
+                  = link_to raw('<i class="fa fa-trash mr-1"></i> Trash'), employee, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"
+
+

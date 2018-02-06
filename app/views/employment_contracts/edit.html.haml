@@ -1,0 +1,15 @@
+/ - breadcrumb :edit_employment_contract, @employment_contract
+
+.card.card-setup-request-edit.mx-auto
+  .card-body.py-5
+    .row
+      .col-sm-10.mx-auto
+        = link_to employment_contracts_path do
+          %i.fa.fa-times.text-muted.float-right.close-card
+        .text-center
+          = image_tag('logo', class: 'contract-logo mb-2')
+          %h3.font-weight-light.mb-3
+            Editing Setup Request
+        = render 'layouts/flash'
+        = render 'form'
+

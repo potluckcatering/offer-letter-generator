@@ -1,0 +1,52 @@
+
+- breadcrumb :employment_contracts
+
+
+
+
+.card.mb-4
+
+  .card-body.py-5
+
+    .row
+      .col-sm-11.mx-auto
+
+        = render 'layouts/close_card'
+        .text-center.mb-3
+          = image_tag('logo', class: 'contract-logo mb-2')
+          %h3.font-weight-light Setup Request History
+          %p.text-muted Preview, edit, past employee setup requests
+        = render 'layouts/flash'
+
+
+        %table.table.table-borderless
+          %thead
+            %tr
+              %th Employee Name
+              %th Created Date
+              %th Updated Date
+              %th
+
+          %tbody
+            - @employment_contracts.each do |employment_contract|
+              %tr
+                %td
+                  #{employment_contract.employee.name} (#{link_to "edit", edit_employee_path(employment_contract.employee)})
+                %td= employment_contract.created_at.strftime("%B %d, %Y")
+                %td= employment_contract.updated_at.strftime("%B %d, %Y")
+
+                %td.text-right
+                  = link_to raw('<i class="icon-doc mr-1"></i> Preview'), employment_contract_path(employment_contract), class: 'btn btn-sm btn-primary'
+                  = link_to raw('<i class="fa fa-pencil mr-1"></i> Edit'), edit_employment_contract_path(employment_contract), class: 'btn btn-sm btn-warning'
+                  = link_to raw('<i class="fa fa-trash mr-1"></i> Trash'), employment_contract, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'    
+                  - if current_user.admin?
+                    = link_to word_doc_path(id: employment_contract.id), class: 'btn btn-sm btn-info' do
+                      %i.fa.fa-cloud-download.mr-1
+                      Download
+                  - else
+                    = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => employment_contract.id), class: "btn btn-sm btn-info"     
+
+
+    / = link_to raw('New Employee'), new_employee_path, class: 'btn-secondary btn'
+    / = link_to raw('New Employee Set Up Request'), new_employment_contract_path, class: 'btn-primary btn'
+
