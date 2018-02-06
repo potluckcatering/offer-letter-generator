@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       get :offer_settings
       put :update_offer_letter
+      put :approve_request
     end
   end
   resources :request_steps, path: '/editing_request'
