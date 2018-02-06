@@ -5,7 +5,7 @@
         = link_to destroy_user_session_path, method: :delete do
           %i.icon-logout.text-muted{style: "position: absolute; top: 0; right: 0; font-size: 1.5rem;"}
         .text-center.mb-3
-          = image_tag('logo', class: 'contract-logo mb-2')
+          = image_tag('https://s3-us-west-2.amazonaws.com/potluck-office/logo.png', class: 'contract-logo mb-2')
 
           %h2.font-weight-light.mb-5 Employee Setup Request
         = render 'layouts/flash'

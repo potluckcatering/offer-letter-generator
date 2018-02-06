@@ -12,7 +12,7 @@ docx.font name: 'Courier New'
 docx.style id: 'AltFont', name: 'altFont', font: 'Palatino'
 
 
-docx.img image_url('potluck-logo.png'), width: 64, height: 64, align: :center
+docx.img image_url('https://s3-us-west-2.amazonaws.com/potluck-office/potluck-logo.png'), width: 64, height: 64, align: :center
 docx.h2 'Employment Contract', align: :center
 docx.p
 docx.p @employment_contract.updated_at.strftime('%B %d, %Y')
