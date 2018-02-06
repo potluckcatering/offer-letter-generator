@@ -1,0 +1,53 @@
+/ - breadcrumb :edit_employment_contract, @employment_contract
+
+.card.card-setup-request-edit.mx-auto
+  .card-body.py-5
+
+    .row
+      .col-sm-10.mx-auto
+        = render 'layouts/close_card'
+        .text-center
+          = image_tag('logo', class: 'contract-logo mb-2')
+          %h3.font-weight-light.mb-3
+            Editing Setup Request
+        = render 'layouts/flash'
+
+
+        = simple_form_for @employment_contract, url: wizard_path, html: { multipart: true } do |f|
+          - if @employment_contract.errors.any?
+            .error_messages
+              %h2
+                = pluralize(@employment_contract.errors.count, "error")
+                prohibited this user from being saved:
+              %ul
+                - @employment_contract.errors.full_messages.each do |msg|
+                  %li= msg
+
+          = yield f
+
+
+          - case step
+            - when :first
+              .row
+                .col
+                  = link_to "< Previous Step", edit_employment_contract_path(@employment_contract), class: "btn  btn-warning btn-block"
+                .col  
+                  = f.button :submit, "Next Step >", class: " btn-primary btn-block"
+            - when :second
+              .row
+                .col              
+                  = link_to "< Previous Step", previous_wizard_path, class: "btn  btn-warning btn-block"
+                .col  
+                  = f.button :submit, "Next Step >", class: " btn-primary btn-block"
+            - when :third
+              .row
+                .col          
+                  = link_to "< Previous Step", previous_wizard_path, class: "btn  btn-warning btn-block"
+                .col  
+                  = f.button :submit, "Next Step >", class: " btn-primary btn-block"
+            - when :fourth
+              .row
+                .col                    
+                  = link_to "< Previous Step", previous_wizard_path, class: "btn  btn-warning btn-block"
+                .col  
+                  = f.button :submit, "Finish", class: " btn-primary btn-block"

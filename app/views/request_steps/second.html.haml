@@ -1,0 +1,7 @@
+= render :layout => 'form' do |f|     
+
+  = f.association :supervisor, include_blank: false, hint: "Who is the employee's immediate supervisor?", label: "Reports to"
+
+  = f.input :start_date, as: :string, input_html: { "data-provide" => "datepicker", "data-date-format" => "yyyy-mm-dd" }, placeholder: Time.now.strftime('%Y-%m-%d'), hint: "When is the employee's official first day of work?"
+
+  = f.input :trial_shift_date, as: :string, input_html: { "data-provide" => "datepicker", "data-date-format" => "yyyy-mm-dd" }, placeholder: Time.now.strftime('%Y-%m-%d'), hint: "When is the employee's trial shift?"

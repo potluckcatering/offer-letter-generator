@@ -1,0 +1,25 @@
+/ - breadcrumb :new_invitation
+
+.card.card-session-new.mx-auto
+  .card-body.py-5
+    .row
+      .col-sm-10.mx-auto
+        = render 'layouts/close_card'
+        .text-center
+          = image_tag('logo', class: 'contract-logo mb-2')
+          %h3.font-weight-light.mb-3
+            Send Invitation
+          %p.text-muted Enter the email of the user you wish to give access
+        = render 'layouts/flash'
+        = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f|
+          / = devise_error_messages!
+          .form-group
+            %label First name
+            %input#first_name.form-control{:name => "first_name", :type => "text"}
+          .form-group
+            %label Last name
+            %input#last_name.form-control{:name => "last_name", :type => "text"}
+          - resource.class.invite_key_fields.each do |field|
+            = f.input field
+
+          = f.button :submit, t("devise.invitations.new.submit_button"), class: 'btn-primary btn-block'

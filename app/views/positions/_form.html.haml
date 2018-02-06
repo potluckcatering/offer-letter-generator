@@ -1,0 +1,13 @@
+= simple_form_for(@position) do |f|
+  = f.error_notification
+
+
+  = f.input :name
+  = f.association :department, include_blank: false
+
+
+  .row
+    .col
+      = link_to "< Back", :back, class: "btn btn-warning btn-block"
+    .col
+      = f.button :submit, "Create Position", class: 'btn btn-primary btn-block'

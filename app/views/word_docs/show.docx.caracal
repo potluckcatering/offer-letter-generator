@@ -1,0 +1,80 @@
+#-----------------------------------------------------
+# page settings
+#-----------------------------------------------------
+
+docx.page_numbers true do
+  align :right
+  label 'Page'
+end
+
+docx.font name: 'Courier New'
+
+docx.style id: 'AltFont', name: 'altFont', font: 'Palatino'
+
+
+docx.img image_url('potluck-logo.png'), width: 64, height: 64, align: :center
+docx.h2 'Employment Contract', align: :center
+docx.p
+docx.p @employment_contract.updated_at.strftime('%B %d, %Y')
+docx.p
+docx.p @employment_contract.employee.name
+docx.p @employment_contract.employee.address.present? ? @employment_contract.employee.address.full_address : 'No Fixed Address'
+docx.p
+docx.p 'Dear ' + @employment_contract.employee.name + ','
+docx.p
+docx.p @employment_contract.settings(:offer_body).introduction % { department: @employment_contract.department.name.upcase }
+
+row1 = ['Position:', @employment_contract.position.name.upcase]
+row2 = ['Job Classification:', @employment_contract.compensation_type ]
+row3 = ['', @employment_contract.settings(:offer_body).job_classification]
+row4 = ['Start Date:', @employment_contract.settings(:offer_body).start_date % { start_date: @employment_contract.start_date.strftime("%B %d, %Y") }]
+
+row5 = ['Wage or Salary:', @employment_contract.settings(:offer_body).wage_salary % { compensation: number_to_currency(@employment_contract.compensation), pay_frequency: @employment_contract.pay_frequency } ]
+
+row6 = ['Vacation:', @employment_contract.settings(:offer_body).vacation % { vacation: @employment_contract.vacation_time, vacation_other: @employment_contract.vacation_time_other } ]
+row7 = ['Probationary Period:', @employment_contract.settings(:offer_body).probationary_period ]
+
+row8 = ['Termination:', @employment_contract.settings(:offer_body).termination ]
+
+row9 = ['Group Insurance Benefits:', @employment_contract.settings(:offer_body).group_insurance_benefits % { classification: @employment_contract.compensation_type.upcase, department: @employment_contract.department.name.upcase } ]
+
+row10 = ['Dress Code or Uniforms:', @employment_contract.settings(:offer_body).dress_code ]
+row11 = ['Equipment:', @employment_contract.settings(:offer_body).equipment ]
+row12 = ['Confidential Information:', @employment_contract.settings(:offer_body).confidential_information ]
+row13 = ['Performance Reviews:', @employment_contract.settings(:offer_body).performance_reviews ]
+row14 = ['Employment Policies:', @employment_contract.settings(:offer_body).employment_policies ]
+row15 = ['Cellphone allowance:', @employment_contract.cellphone_allowance ]
+row16 = ['Other:', @employment_contract.settings(:offer_body).allowances % { other: @employment_contract.other_allowances , bonus: @employment_contract.bonus_structure, professional_development: @employment_contract.professional_development_funding  } ]
+
+
+
+
+docx.p
+docx.table [row1.dup, row2.dup, row3.dup, row4.dup, row5.dup, row6.dup, row7.dup, row8.dup, row9.dup, row10.dup, row11.dup, row12.dup, row13.dup, row14.dup, row15.dup, row16.dup], border_size: 0 do
+  cell_style cols[0],    bold: true
+  cell_style cols[1],    width: 6000
+end
+docx.p
+
+docx.p 'On behalf of everyone, it is my pleasure to welcome you to Potluck. We look forward to working with you.'
+docx.p
+docx.p 'Sincerely,'
+docx.p
+docx.p @employment_contract.department.name.upcase
+docx.p
+docx.p
+docx.p
+docx.p '_________________________'
+docx.p 'Authorized Signature'
+docx.p @employment_contract.supervisor.name
+docx.p
+docx.p
+docx.p
+docx.p 'I have read, understood and hereby voluntarily acknowledge these terms and conditions of my employment with Potluck outlined in this letter.'
+docx.p
+docx.p 'Dated this __ day of __________________, 20___'
+docx.p
+docx.p
+docx.p
+docx.p '_________________________'
+docx.p @employment_contract.employee.name

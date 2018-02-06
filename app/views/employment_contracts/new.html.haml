@@ -1,0 +1,21 @@
+
+
+
+
+.card.card-setup-request-edit.mx-auto
+  .card-body.py-5
+    .row
+      .col-sm-10.mx-auto
+        = render 'layouts/close_card'
+        .text-center
+          = image_tag('logo', class: 'contract-logo mb-2')
+          %h3.font-weight-light.mb-3
+            New Employee Setup Request
+
+          %p Enter the details of the employment offer
+          
+        = render 'layouts/flash'
+        
+        = render 'form'
+
+

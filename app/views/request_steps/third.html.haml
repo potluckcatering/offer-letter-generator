@@ -1,0 +1,4 @@
+= render :layout => 'form' do |f|     
+  = f.input :vacation_time, collection: EmploymentContract.vacation_times.keys.to_a, include_blank: "Select from list or leave blank", hint: "The employee's vacation benefits"
+  = f.input :vacation_time_other, hint: "If not listed above or additional benefits"
+  = f.input :cellphone_allowance, collection: EmploymentContract.cellphone_allowances.keys.to_a, include_blank: false, hint: "Employee cell phone allowance"
