@@ -1,7 +1,7 @@
 class EmploymentContractsController < ApplicationController
   # respond_to :docx
   before_action :set_employment_contract, only: [:show, :edit, :update, :destroy, :offer_settings, :update_offer_letter, :send_notification_email, :approve_request]
-
+  before_action :check_approved, only: [:edit, :offer_settings, :destroy]
   # GET /employment_contracts
   # GET /employment_contracts.json
   def index
@@ -26,7 +26,7 @@ class EmploymentContractsController < ApplicationController
   end
 
   def approve_request
-    @employment_contract.update(approved: true)
+    @employment_contract.update(approved_at: Time.now)
     @user = @employment_contract.supervisor
     UserMailer.approved_email(@user, @employment_contract, employment_contract_url(@employment_contract)).deliver_now
     flash[:notice] = "Successfully approved Setup Request. It is now available for download."
@@ -92,6 +92,14 @@ class EmploymentContractsController < ApplicationController
   end
 
   private
+
+    def check_approved
+      if @employment_contract.approved_at != nil
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to(request.referrer || root_path)    
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_employment_contract
       @employment_contract = EmploymentContract.find(params[:id])
@@ -99,6 +107,6 @@ class EmploymentContractsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employment_contract_params
-      params.require(:employment_contract).permit(:department_id, :approved, :position_id, :compensation, :pay_frequency, :compensation_type, :supervisor_id, :start_date, :employee_id)
+      params.require(:employment_contract).permit(:department_id, :approved, :position_id, :compensation, :pay_frequency, :compensation_type, :supervisor_id, :start_date, :employee_id, :use_of_company_vehicle)
     end
 end

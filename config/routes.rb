@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     invitations: 'users/invitations'
   }
-
+  resources :users, only: [:edit, :index, :update]
   resource :word_doc, only: :show, format: 'docx'
 
   get :send_notification_email, to: 'employment_contracts#send_notification_email', as: :send_notification_email

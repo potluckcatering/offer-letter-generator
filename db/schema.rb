@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206172334) do
+ActiveRecord::Schema.define(version: 20180313054640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20180206172334) do
     t.string "bonus_structure"
     t.string "professional_development_funding"
     t.boolean "approved", default: false
+    t.boolean "use_of_company_vehicle"
+    t.datetime "approved_at"
     t.index ["department_id"], name: "index_employment_contracts_on_department_id"
     t.index ["employee_id"], name: "index_employment_contracts_on_employee_id"
     t.index ["position_id"], name: "index_employment_contracts_on_position_id"

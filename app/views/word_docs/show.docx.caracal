@@ -22,7 +22,7 @@ docx.p @employment_contract.employee.address.present? ? @employment_contract.emp
 docx.p
 docx.p 'Dear ' + @employment_contract.employee.name + ','
 docx.p
-docx.p @employment_contract.settings(:offer_body).introduction % { department: @employment_contract.department.name.upcase }
+docx.p @employment_contract.settings(:offer_body).introduction % { department: @employment_contract.department.name.upcase, offer: @employment_contract.employee.first?(@employment_contract) ? 'offer you' : 'offer you a change in your' }
 
 row1 = ['Position:', @employment_contract.position.name.upcase]
 row2 = ['Job Classification:', @employment_contract.compensation_type ]
@@ -36,10 +36,20 @@ row7 = ['Probationary Period:', @employment_contract.settings(:offer_body).proba
 
 row8 = ['Termination:', @employment_contract.settings(:offer_body).termination ]
 
-row9 = ['Group Insurance Benefits:', @employment_contract.settings(:offer_body).group_insurance_benefits % { classification: @employment_contract.compensation_type.upcase, department: @employment_contract.department.name.upcase } ]
+case @employment_contract.read_attribute_before_type_cast(:compensation_type)
+when 0
+	row9 = ['Benefits:', @employment_contract.settings(:offer_body).no_benefits ]
+when 1
+	row9 = ['Benefits:', @employment_contract.settings(:offer_body).pt_benefits ]
+when 2
+	row9 = ['Benefits:', @employment_contract.settings(:offer_body).ft_benefits ]
+when 3
+	row9 = ['Benefits:', @employment_contract.settings(:offer_body).ft_benefits ]
+end
 
-row10 = ['Dress Code or Uniforms:', @employment_contract.settings(:offer_body).dress_code ]
-row11 = ['Equipment:', @employment_contract.settings(:offer_body).equipment ]
+
+row10 = ['Dress Code:', @employment_contract.settings(:offer_body).dress_code ]
+row11 = ['Equipment:', @employment_contract.use_of_company_vehicle? ?  (@employment_contract.settings(:offer_body).equipment + " " + @employment_contract.settings(:offer_body).driver_equipment) : @employment_contract.settings(:offer_body).equipment ]
 row12 = ['Confidential Information:', @employment_contract.settings(:offer_body).confidential_information ]
 row13 = ['Performance Reviews:', @employment_contract.settings(:offer_body).performance_reviews ]
 row14 = ['Employment Policies:', @employment_contract.settings(:offer_body).employment_policies ]
