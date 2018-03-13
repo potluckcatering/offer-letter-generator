@@ -7,9 +7,9 @@
 
   = f.association :department, include_blank: false, input_html: { class: "selectize" }, hint: "Does the employee fall under the Society or the Inc?"
 
-
   = f.association :position, include_blank: "Select from list", input_html: { class: "selectize" }, hint: raw("If the position is not listed, you must #{link_to 'create it', new_position_path} first.")
 
+  = f.input :use_of_company_vehicle, :as => :select, :collection => [['No',false],['Yes',true]], :include_blank => false, :label => "Has use of company vehicle?"
 
 
   .row

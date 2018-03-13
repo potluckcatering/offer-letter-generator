@@ -18,7 +18,15 @@
             = settings.input :vacation, as: :text, input_html: { rows: 5 }
             = settings.input :probationary_period, as: :text, input_html: { rows: 5 }
             = settings.input :termination, as: :text, input_html: { rows: 5 }
-            = settings.input :group_insurance_benefits, as: :text, input_html: { rows: 5 }
+            - case @employment_contract.read_attribute_before_type_cast(:compensation_type)
+            - when 0
+              = settings.input :no_benefits, as: :text, input_html: { rows: 5 }
+            - when 1
+              = settings.input :pt_benefits, as: :text, input_html: { rows: 5 }
+            - when 2
+              = settings.input :ft_benefits, as: :text, input_html: { rows: 5 }
+            - when 3
+              = settings.input :ft_benefits, as: :text, input_html: { rows: 5 }
             = settings.input :dress_code, as: :text, input_html: { rows: 5 }
             = settings.input :equipment, as: :text, input_html: { rows: 5 }
             = settings.input :confidential_information, as: :text, input_html: { rows: 5 }

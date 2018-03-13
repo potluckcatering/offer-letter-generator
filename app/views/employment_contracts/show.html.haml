@@ -23,7 +23,7 @@
           #{ @employment_contract.employee.address.present? ? raw(@employment_contract.employee.address.full_address_letter) : 'No Fixed Address' }
           (#{link_to "edit", edit_employee_path(@employment_contract.employee)})
         .mb-5 Dear #{@employment_contract.employee.name},
-        .mb-5 #{@employment_contract.settings(:offer_body).introduction % { department: @employment_contract.department.name.upcase } }       
+        .mb-5 #{@employment_contract.settings(:offer_body).introduction % { department: @employment_contract.department.name.upcase, offer: @employment_contract.employee.first?(@employment_contract) ? 'offer you' : 'offer you a change in your' } }       
         .row.mb-4
           .col-sm-4
             %strong Position:
@@ -62,20 +62,26 @@
             #{ simple_format @employment_contract.settings(:offer_body).termination }       
         .row.mb-4
           .col-sm-4
-            %strong Group Insurance Benefits:
+            %strong Benefits:
           .col-sm-8         
-            #{ simple_format(@employment_contract.settings(:offer_body).group_insurance_benefits % { classification: @employment_contract.compensation_type.upcase, department: @employment_contract.department.name.upcase }) }       
+            - if @employment_contract.read_attribute_before_type_cast(:compensation_type) == 0
+              #{ simple_format @employment_contract.settings(:offer_body).no_benefits }
+            - if @employment_contract.read_attribute_before_type_cast(:compensation_type) == 1
+              #{ simple_format @employment_contract.settings(:offer_body).pt_benefits }
+            - if (@employment_contract.read_attribute_before_type_cast(:compensation_type) == 2) || (@employment_contract.read_attribute_before_type_cast(:compensation_type) == 3)
+              #{ simple_format @employment_contract.settings(:offer_body).ft_benefits }   
 
         .row.mb-4
           .col-sm-4
-            %strong Dress Code or Uniforms:
+            %strong Dress Code:
           .col-sm-8
             #{ simple_format @employment_contract.settings(:offer_body).dress_code }       
         .row.mb-4
           .col-sm-4
             %strong Equipment:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).equipment }       
+            #{ simple_format @employment_contract.settings(:offer_body).equipment }    
+            #{ simple_format(@employment_contract.settings(:offer_body).driver_equipment) if @employment_contract.use_of_company_vehicle? }       
         .row.mb-4
           .col-sm-4
             %strong Confidential Information:
@@ -105,20 +111,22 @@
             %p #{ @employment_contract.professional_development_funding.blank? ? '' : 'Professional development funding: ' + @employment_contract.professional_development_funding }
         .row.mb-4
           .col-sm-3.ml-auto
-            = link_to raw('<i class="icon-pencil mr-1"></i> Edit Request'), edit_employment_contract_path(@employment_contract), class: 'btn btn-block btn-warning'
+            - if @employment_contract.approved_at == nil
+              = link_to raw('<i class="icon-pencil mr-1"></i> Edit Request'), edit_employment_contract_path(@employment_contract), class: 'btn btn-block btn-warning'
           .col-sm-3
-            = link_to raw('<i class="icon-note mr-1"></i> Edit Offer Body'), offer_settings_employment_contract_path(@employment_contract), class: 'btn btn-block btn-secondary'
+            - if @employment_contract.approved_at == nil
+              = link_to raw('<i class="icon-note mr-1"></i> Edit Offer Body'), offer_settings_employment_contract_path(@employment_contract), class: 'btn btn-block btn-secondary'
           .col-sm-3
             - if current_user.admin?
-              - if @employment_contract.approved?
+              - if @employment_contract.approved_at != nil
                 = link_to word_doc_path(id: @employment_contract.id), class: 'btn btn-block btn-info' do
                   %i.fa.fa-cloud-download.mr-1
                   Download
               - else
-                = link_to raw("<i class='icon-check'></i> Approve Request"), approve_request_employment_contract_path(id: @employment_contract.id), :method => :put, class: "btn btn-block btn-info"
+                = link_to raw("<i class='icon-check'></i> Approve Request"), approve_request_employment_contract_path(id: @employment_contract.id), :method => :put, data: { confirm: 'You can not edit the contract after you proceed. Are you sure?' }, class: "btn btn-block btn-info"
 
             - else
-              - if @employment_contract.approved?
+              - if @employment_contract.approved_at != nil
                 = link_to word_doc_path(id: @employment_contract.id), class: 'btn btn-block btn-info' do
                   %i.fa.fa-cloud-download.mr-1
                   Download
