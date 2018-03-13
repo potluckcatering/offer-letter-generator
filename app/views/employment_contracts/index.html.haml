@@ -23,7 +23,6 @@
           %thead
             %tr
               %th Employee Name
-              %th Created Date
               %th Updated Date
               %th Approved On
               %th
@@ -33,7 +32,6 @@
               %tr
                 %td
                   #{employment_contract.employee.name} (#{link_to "edit", edit_employee_path(employment_contract.employee)})
-                %td= employment_contract.created_at.strftime("%B %d, %Y")
                 %td= employment_contract.updated_at.strftime("%B %d, %Y")
                 %td #{employment_contract.approved_at.strftime("%B %d, %Y") if employment_contract.approved_at.present?}
 
