@@ -37,8 +37,7 @@
                   - if current_user.admin?
                     = link_to raw('<i class="fa fa-pencil mr-1"></i> Edit'), edit_employment_contract_path(employment_contract), class: 'btn btn-sm btn-warning'
                   = link_to raw('<i class="icon-doc mr-1"></i> Preview'), employment_contract_path(employment_contract), class: 'btn btn-sm btn-primary'
-                  - if employment_contract.approved_at == nil
-                    = link_to raw('<i class="fa fa-pencil mr-1"></i> Edit'), edit_employment_contract_path(employment_contract), class: 'btn btn-sm btn-warning'
+
                   - if employment_contract.approved_at == nil  
                     = link_to raw('<i class="fa fa-trash mr-1"></i> Trash'), employment_contract, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'    
                   - if current_user.admin?
