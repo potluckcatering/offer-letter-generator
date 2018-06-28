@@ -33,6 +33,12 @@ csv-parse@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-2.0.0.tgz#4ea22c973233987f07688c601a2d460234ff56d1"
 
+datatables@^1.10.13:
+  version "1.10.13"
+  resolved "https://registry.yarnpkg.com/datatables/-/datatables-1.10.13.tgz#9bb2dec6f7dcf02049a00e4f0e7d3fe009c39346"
+  dependencies:
+    jquery ">=1.7"
+
 esprima@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-3.0.0.tgz#53cf247acda77313e551c3aa2e73342d3fb4f7d9"
@@ -47,13 +53,13 @@ jquery-wizard@^0.4.4:
   dependencies:
     jquery ">=2.2.0"
 
+jquery@>=1.7, jquery@>=2.2.0:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+
 "jquery@>=1.7.1 <4.0.0", jquery@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
-
-jquery@>=2.2.0:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 lodash@^4.14.0:
   version "4.17.4"
