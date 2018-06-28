@@ -1,7 +1,7 @@
 class EmploymentContractsController < ApplicationController
   # respond_to :docx
   before_action :set_employment_contract, only: [:show, :edit, :update, :destroy, :offer_settings, :update_offer_letter, :send_notification_email, :approve_request]
-  before_action :check_approved, only: [:edit, :offer_settings, :destroy]
+  before_action :check_approved, only: [:offer_settings, :destroy]
   # GET /employment_contracts
   # GET /employment_contracts.json
   def index

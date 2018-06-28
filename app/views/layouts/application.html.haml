@@ -9,7 +9,10 @@
     = favicon_link_tag "https://s3-us-west-2.amazonaws.com/potluck-office/favicon.png"
     %link{:href => "https://fonts.googleapis.com/css?family=Roboto:300,400,500", :rel => "stylesheet"}/
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    %link{href: "https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css", rel: "stylesheet"}
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %script{src: "https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"}
+    %script{src: "https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"}
   %body.bg-dark
     .container
       = yield

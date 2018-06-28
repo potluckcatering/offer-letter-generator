@@ -16,7 +16,7 @@
         = render 'layouts/flash'
 
 
-        %table.table.table-borderless
+        %table.table.table-borderless#datatable
           %thead
             %tr
               %th Employee Name
@@ -34,6 +34,8 @@
 
 
                 %td.text-right
+                  - if current_user.admin?
+                    = link_to raw('<i class="fa fa-pencil mr-1"></i> Edit'), edit_employment_contract_path(employment_contract), class: 'btn btn-sm btn-warning'
                   = link_to raw('<i class="icon-doc mr-1"></i> Preview'), employment_contract_path(employment_contract), class: 'btn btn-sm btn-primary'
                   - if employment_contract.approved_at == nil
                     = link_to raw('<i class="fa fa-pencil mr-1"></i> Edit'), edit_employment_contract_path(employment_contract), class: 'btn btn-sm btn-warning'
@@ -58,4 +60,12 @@
 
     / = link_to raw('New Employee'), new_employee_path, class: 'btn-secondary btn'
     / = link_to raw('New Employee Set Up Request'), new_employment_contract_path, class: 'btn-primary btn'
+
+- content_for :body_js do
+  :javascript
+    $(document).ready(function() {
+      $('#datatable').DataTable();
+    } );
+
+
 
