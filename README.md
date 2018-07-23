@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the latest codebase for Potluck's internal offer letter generator Rails app.
 
-Things you may want to cover:
+https://potluck-office.herkouapp.com
 
-* Ruby version
+For future developers:
 
-* System dependencies
+* You should have Ruby and Rails installed on your system and be comfortable using the command line
 
-* Configuration
+* You should be comfortable with Heroku and Amazon AWS.
 
-* Database creation
+* If you know both, you got this ;)
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
