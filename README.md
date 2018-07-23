@@ -11,4 +11,3 @@ For future developers:
 * You should be comfortable with Heroku and Amazon AWS.
 
 * If you know both, you got this ;)
-
