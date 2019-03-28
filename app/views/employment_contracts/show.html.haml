@@ -17,13 +17,13 @@
 
 
         .mb-5 #{@employment_contract.updated_at.strftime("%B %d, %Y")}
-        .mb-5 
+        .mb-5
           #{@employment_contract.employee.name}
           %br
           #{ @employment_contract.employee.address.present? ? raw(@employment_contract.employee.address.full_address_letter) : 'No Fixed Address' }
           (#{link_to "edit", edit_employee_path(@employment_contract.employee)})
         .mb-5 Dear #{@employment_contract.employee.name},
-        .mb-5 #{@employment_contract.settings(:offer_body).introduction % { department: @employment_contract.department.name.upcase, offer: @employment_contract.employee.first?(@employment_contract) ? 'offer you' : 'offer you a change in your' } }       
+        .mb-5 #{@employment_contract.settings(:offer_body).introduction % { department: @employment_contract.department.name.upcase, offer: @employment_contract.employee.first?(@employment_contract) ? 'offer you' : 'offer you a change in your' } }
         .row.mb-4
           .col-sm-4
             %strong Position:
@@ -34,64 +34,64 @@
             %strong Job Classification:
           .col-sm-8
             %p #{@employment_contract.compensation_type}
-            #{ simple_format @employment_contract.settings(:offer_body).job_classification }       
+            #{ simple_format @employment_contract.settings(:offer_body).job_classification }
         .row.mb-4
           .col-sm-4
             %strong Start Date:
-          .col-sm-8            
-            #{ @employment_contract.settings(:offer_body).start_date % { start_date: @employment_contract.start_date.strftime("%B %d, %Y") } }       
+          .col-sm-8
+            #{ @employment_contract.settings(:offer_body).start_date % { start_date: @employment_contract.start_date.strftime("%B %d, %Y") } }
         .row.mb-4
           .col-sm-4
             %strong Wage or Salary:
           .col-sm-8
-            #{ @employment_contract.settings(:offer_body).wage_salary % { compensation: number_to_currency(@employment_contract.compensation), pay_frequency: @employment_contract.pay_frequency } }       
+            #{ @employment_contract.settings(:offer_body).wage_salary % { compensation: number_to_currency(@employment_contract.compensation), pay_frequency: @employment_contract.pay_frequency } }
         .row.mb-4
           .col-sm-4
             %strong Vacation:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).vacation % { vacation: @employment_contract.vacation_time, vacation_other: @employment_contract.vacation_time_other } }       
+            #{ simple_format @employment_contract.settings(:offer_body).vacation % { vacation: @employment_contract.vacation_time, vacation_other: @employment_contract.vacation_time_other } }
         .row.mb-4
           .col-sm-4
             %strong Probationary Period:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).probationary_period }       
+            #{ simple_format @employment_contract.settings(:offer_body).probationary_period }
         .row.mb-4
           .col-sm-4
             %strong Termination:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).termination }       
+            #{ simple_format @employment_contract.settings(:offer_body).termination }
         .row.mb-4
           .col-sm-4
             %strong Benefits:
-          .col-sm-8         
+          .col-sm-8
             - if @employment_contract.read_attribute_before_type_cast(:compensation_type) == 0
               #{ simple_format @employment_contract.settings(:offer_body).no_benefits }
             - if @employment_contract.read_attribute_before_type_cast(:compensation_type) == 1
               #{ simple_format @employment_contract.settings(:offer_body).pt_benefits }
             - if (@employment_contract.read_attribute_before_type_cast(:compensation_type) == 2) || (@employment_contract.read_attribute_before_type_cast(:compensation_type) == 3)
-              #{ simple_format @employment_contract.settings(:offer_body).ft_benefits }   
+              #{ simple_format @employment_contract.settings(:offer_body).ft_benefits }
 
         .row.mb-4
           .col-sm-4
             %strong Dress Code:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).dress_code }       
+            #{ simple_format @employment_contract.settings(:offer_body).dress_code }
         .row.mb-4
           .col-sm-4
             %strong Equipment:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).equipment }    
-            #{ simple_format(@employment_contract.settings(:offer_body).driver_equipment) if @employment_contract.use_of_company_vehicle? }       
+            #{ simple_format @employment_contract.settings(:offer_body).equipment }
+            #{ simple_format(@employment_contract.settings(:offer_body).driver_equipment) if @employment_contract.use_of_company_vehicle? }
         .row.mb-4
           .col-sm-4
             %strong Confidential Information:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).confidential_information }       
+            #{ simple_format @employment_contract.settings(:offer_body).confidential_information }
         .row.mb-4
           .col-sm-4
             %strong Performance Reviews:
           .col-sm-8
-            #{ simple_format @employment_contract.settings(:offer_body).performance_reviews }       
+            #{ simple_format @employment_contract.settings(:offer_body).performance_reviews }
         .row.mb-4
           .col-sm-4
             %strong Employment Policies:
@@ -131,4 +131,5 @@
                   %i.fa.fa-cloud-download.mr-1
                   Download
               - else
-                = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => @employment_contract.id), class: "btn btn-block btn-info"     
+                -# = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => @employment_contract.id), class: "btn btn-block btn-info"
+                = link_to raw("<i class='icon-check'></i> Approve Request"), approve_request_employment_contract_path(id: @employment_contract.id), :method => :put, data: { confirm: 'You can not edit the contract after you proceed. Are you sure?' }, class: "btn btn-block btn-info"

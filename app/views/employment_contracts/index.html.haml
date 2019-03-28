@@ -35,8 +35,8 @@
                 = link_to raw('<i class="fa fa-pencil mr-1"></i> Edit'), edit_employment_contract_path(employment_contract), class: 'btn btn-sm btn-warning'
               = link_to raw('<i class="icon-doc mr-1"></i> Preview'), employment_contract_path(employment_contract), class: 'btn btn-sm btn-primary'
 
-              - if employment_contract.approved_at == nil  
-                = link_to raw('<i class="fa fa-trash mr-1"></i> Trash'), employment_contract, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'    
+              - if employment_contract.approved_at == nil
+                = link_to raw('<i class="fa fa-trash mr-1"></i> Trash'), employment_contract, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
               - if current_user.admin?
                 - if employment_contract.approved_at != nil
                   = link_to word_doc_path(id: employment_contract.id), class: 'btn btn-sm btn-info' do
@@ -48,9 +48,10 @@
                 - if employment_contract.approved_at != nil
                   = link_to word_doc_path(id: employment_contract.id), class: 'btn btn-sm btn-info' do
                     %i.fa.fa-cloud-download.mr-1
-                    Download        
+                    Download
                 - else
-                  = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => employment_contract.id), class: "btn btn-sm btn-info"
+                  -# = link_to raw('<i class="fa fa-envelope mr-1"></i> Send Request'), send_notification_email_path(:id => employment_contract.id), class: "btn btn-sm btn-info"
+                  = link_to raw("<i class='icon-check'></i> Approve"), approve_request_employment_contract_path(id: employment_contract.id), :method => :put, data: { confirm: 'You can not edit the contract after you proceed. Are you sure?' }, class: "btn btn-sm btn-info"
 
 
 
@@ -62,6 +63,3 @@
     $(document).ready(function() {
       $('#datatable').DataTable();
     } );
-
-
-
